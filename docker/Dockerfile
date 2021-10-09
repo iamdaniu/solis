@@ -1,5 +1,7 @@
-FROM adoptopenjdk/openjdk11:alpine
+FROM adoptopenjdk/openjdk11:jre
 
-COPY target/solis-1.0.jar .
+ARG JARFILE
 
-CMD ["java", "-jar", "solis-1.0.jar"]
+COPY $JARFILE solis.jar
+
+CMD ["java", "-jar", "solis.jar"]
