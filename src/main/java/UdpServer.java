@@ -17,8 +17,9 @@ public class UdpServer {
     public static void main(String[] args) throws IOException {
         new UdpServer(4545)
                 .addConsumer(new ConsoleOutput(8))
-                .addConsumer(new FileStorage("logs"))
-                .addConsumer(new TcpWriter("rhas", 9999))
+                .addConsumer(new FileStorage("/logs"))
+                .addConsumer(new UdpWriter("rhas", 9999))
+//                .addConsumer(new TcpWriter("rhas", 9999))
                 .start();
     }
 
