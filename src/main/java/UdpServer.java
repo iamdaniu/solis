@@ -32,11 +32,19 @@ public class UdpServer {
                 System.arraycopy(packet.getData(), 0, actualData, 0, packet.getLength());
 
                 if (filter.test(actualData)) {
-                    consumers.forEach(c -> c.accept(actualData));
+                    consumers.forEach(c -> consumeSafely(actualData, c));
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void consumeSafely(byte[] data, Consumer<byte[]> consumer) {
+        try {
+            consumer.accept(data);
+        } catch (RuntimeException ex) {
+            ex.printStackTrace();
         }
     }
 }

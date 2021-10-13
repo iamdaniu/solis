@@ -21,7 +21,8 @@ public class Main {
         List<Supplier<Consumer<byte[]>>> cf = List.of(
                 ConsoleOutput::fromProperties,
                 FileStorage::fromProperties,
-                UdpWriter::fromProperties
+                UdpWriter::fromProperties,
+                JsonRewriter::fromProperties
         );
         for (Supplier<Consumer<byte[]>> consumers : cf) {
             Optional.ofNullable(consumers.get())
